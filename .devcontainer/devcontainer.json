@@ -1,0 +1,11 @@
+{
+    "name": "C++ Development Container",
+    "image": "mcr.microsoft.com/vscode/devcontainers/cpp:0-ubuntu",
+    "settings": {
+      "terminal.integrated.shell.linux": "/bin/bash"
+    },
+    "extensions": [
+      "ms-vscode.cpptools"
+    ]
+  }
+  
