@@ -54,7 +54,47 @@ void complexidadeLogaritmica(const std::vector<int>& arr, int valor) {
     printf("não achei o valor %d com %d acessos ao array de %ld posições\n", valor, contador, arr.size());
 }
 
-//FALTA LINEAR LOGARITMICA O(n log n)
+//recebe uma lista desordenada
+//ordenada a lista 
+//busca valor
+void complexidadeLinearLogaritmica(std::vector<int> arr, int primeiraMetade, int segundaMetade, int valor, int contador) {
+
+    contador++;
+    
+    int meio = primeiraMetade + (segundaMetade - primeiraMetade) / 2;
+    
+    if (arr[meio] == valor) {
+        std::cout << "\nComplexidade linear logaritmica: ";
+        printf("achei o valor %d com %d acessos ao array de %ld posições\n", valor, contador, arr.size());
+        
+        return;
+    }
+    
+    int indicesAteValor = 0;
+    
+    for(int x = primeiraMetade; x <= segundaMetade; x++) {
+        
+        if (arr[x] == valor) {
+            break;
+        }
+        
+        indicesAteValor++;
+        
+    }
+    
+    printf("\n...Faltam %d índices até o valor %d", indicesAteValor, valor);
+    
+    if (arr[meio] < valor)
+        primeiraMetade = meio + 1;
+    else
+        segundaMetade = meio - 1;
+        
+    complexidadeLinearLogaritmica(arr, primeiraMetade, segundaMetade, valor, contador);
+    
+    return;
+}
+
+//-----------------------------------
 
 //FALTA QUADRÁTICA O(n^2)
 
@@ -65,10 +105,11 @@ void complexidadeLogaritmica(const std::vector<int>& arr, int valor) {
 
 int main()
 {
-    std::vector<int> arr = {1, 2, 3, 4, 5};
+    std::vector<int> arr_ordenado = {1, 2, 3, 4, 5};
     int valor = 3;
     
-    complexidadeConstante(arr, valor);
-    complexidadeLinear(arr, valor);
+    complexidadeConstante(arr_ordenado, valor);
+    complexidadeLinear(arr_ordenado, valor);
     complexidadeLogaritmica(arr, valor);
+     complexidadeLinearLogaritmica(arr, 0, arr.size() - 1, valor, 0);
 }
