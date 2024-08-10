@@ -13,7 +13,7 @@ void complexidadeConstante(const std::vector<int>& arr, int indice) {
 //poderá, no melhor cenário executar 1 acesso, como também no pior cenário executar N acessos. Onde N é o tamanho do array
 //funciona em qualquer tipo de lista/array
 void complexidadeLinear(const std::vector<int>& arr, int valor) {
-    int contador = 1;
+    int contador = 0;
     for(int x = 0; x < arr.size(); x++) {
         contador++;
         if(arr[x] == valor){
@@ -97,6 +97,36 @@ void complexidadeLinearLogaritmica(std::vector<int> arr, int primeiraMetade, int
 //-----------------------------------
 
 //FALTA QUADRÁTICA O(n^2)
+//percorrerá o laço sempre 2x por iteração, por isso quadrático. Pois é n^2
+void complexidadeQuadratica(std::vector<int>& arr, int valor) {
+
+    int inicio = 0;
+    int fim = arr.size() - 1;
+    int contador = 0;
+
+    for (int x = 0; x < arr.size() - 1; x++) {
+        contador++;
+
+        if(arr[x] == valor) {
+            std::cout << "\nComplexidade quadrática: ";
+            printf("achei o valor %d com %d acessos ao array de %ld posições\n", valor, contador, arr.size());
+            return;
+        }
+
+        for (int y = fim; y > inicio; y--) {
+            contador++;
+                if(arr[y] == valor) {
+                    std::cout << "\nComplexidade quadrática: ";
+                    printf("achei o valor %d com %d acessos ao array de %ld posições\n", valor, contador, arr.size());
+                    return;
+                }else {
+                    inicio++;
+                    fim--;
+                    break;
+                }
+        }    
+    }
+}
 
 //FALTA EXPONENCIAL O(2^n)
 
@@ -111,5 +141,6 @@ int main()
     complexidadeConstante(arr_ordenado, valor);
     complexidadeLinear(arr_ordenado, valor);
     complexidadeLogaritmica(arr, valor);
-     complexidadeLinearLogaritmica(arr, 0, arr.size() - 1, valor, 0);
+    complexidadeLinearLogaritmica(arr, 0, arr.size() - 1, valor, 0);
+    complexidadeQuadratica(arr_ordenado, valor);
 }
